@@ -7,5 +7,7 @@ public interface Command {
 	public static FileStructure fileStructure = new FileStructure();
 	
 	public void execute(String... args);
+	
+	public String getCommandString();
 
 }
