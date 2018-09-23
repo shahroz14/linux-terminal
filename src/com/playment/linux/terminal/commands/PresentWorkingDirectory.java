@@ -2,8 +2,6 @@ package com.playment.linux.terminal.commands;
 
 public class PresentWorkingDirectory implements Command {
 	
-	private String commandString;
-	
 	private static PresentWorkingDirectory presentWorkingDirectory;
 	
 	private PresentWorkingDirectory() {
@@ -23,7 +21,7 @@ public class PresentWorkingDirectory implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "pwd";
 	}
 
 }

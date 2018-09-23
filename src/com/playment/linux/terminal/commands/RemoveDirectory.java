@@ -2,8 +2,6 @@ package com.playment.linux.terminal.commands;
 
 public class RemoveDirectory implements Command {
 
-	private String commandString;
-
 	private static RemoveDirectory removeDirectory;
 
 	private RemoveDirectory() {
@@ -23,7 +21,7 @@ public class RemoveDirectory implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "rm";
 	}
 
 }

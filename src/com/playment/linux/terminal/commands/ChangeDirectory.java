@@ -2,8 +2,6 @@ package com.playment.linux.terminal.commands;
 
 public class ChangeDirectory implements Command {
 
-	private String commandString;
-	
 	private static ChangeDirectory changeDirectory;
 
 	private ChangeDirectory() {
@@ -27,7 +25,7 @@ public class ChangeDirectory implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "cd";
 	}
 
 }

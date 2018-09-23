@@ -2,8 +2,6 @@ package com.playment.linux.terminal.commands;
 
 public class ClearSession implements Command {
 	
-	private String commandString;
-	
 	private static ClearSession clearSession;
 
 	private ClearSession() {
@@ -23,7 +21,7 @@ public class ClearSession implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "clear";
 	}
 
 }

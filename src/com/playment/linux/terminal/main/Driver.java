@@ -11,7 +11,7 @@ public class Driver {
 	private static String cursor = "$";
 
 	public static void main(String[] args) {
-
+		
 		in = new Scanner(System.in);
 		while (true) {
 			System.out.print(cursor + " ");

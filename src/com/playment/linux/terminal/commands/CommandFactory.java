@@ -1,7 +1,10 @@
 package com.playment.linux.terminal.commands;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+import com.playment.linux.terminal.utils.CommandUtils;
 
 /**
  * All implementation of commands resides here.
@@ -14,12 +17,12 @@ public class CommandFactory {
 	private static Map<String, Command> commands = new HashMap<>();
 
 	static {
-		commands.put("mkdir", new MakeDirectory());
-		commands.put("ls", new ListDirectories());
-		commands.put("rm", new RemoveDirectory());
-		commands.put("cd", new ChangeDirectory());
-		commands.put("pwd", new PresentWorkingDirectory());
-		commands.put("clear", new ClearSession());
+		Iterator<Class<? extends Command>> iterator = CommandUtils.getAllCommandsImplementations().iterator();
+		while (iterator.hasNext()) {
+			Class<? extends Command> command = iterator.next();
+			Command commandInstance = CommandUtils.getCommandInstance(command);
+			commands.put(commandInstance.getCommandString(), commandInstance);
+		}
 	}
 
 	private static boolean isValidCommand(String command) {

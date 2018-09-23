@@ -2,15 +2,13 @@ package com.playment.linux.terminal.commands;
 
 public class ListDirectories implements Command {
 	
-	private String commandString;
-	
 	private static ListDirectories listDirectories;
 
 	private ListDirectories() {
 		
 	}
 
-	public static ClearSession getInstance() {
+	public static ListDirectories getInstance() {
 		if (listDirectories == null)
 			listDirectories = new ListDirectories();
 		return listDirectories;
@@ -23,7 +21,7 @@ public class ListDirectories implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "ls";
 	}
 
 }

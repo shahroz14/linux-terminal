@@ -2,8 +2,6 @@ package com.playment.linux.terminal.commands;
 
 public class MakeDirectory implements Command {
 	
-	private String commandString;
-	
 	private static MakeDirectory makeDirectory;
 	
 	private MakeDirectory() {
@@ -27,7 +25,7 @@ public class MakeDirectory implements Command {
 
 	@Override
 	public String getCommandString() {
-		return commandString;
+		return "mkdir";
 	}
 
 }
