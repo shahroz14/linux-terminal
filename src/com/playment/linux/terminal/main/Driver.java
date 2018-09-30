@@ -8,10 +8,12 @@ public class Driver {
 
 	private static Scanner in;
 
-	private static String cursor = "$";
+	private static String cursor = "$>";
 
 	public static void main(String[] args) {
-		
+
+		System.out.println("Starting your application...");
+
 		in = new Scanner(System.in);
 		while (true) {
 			System.out.print(cursor + " ");

@@ -48,7 +48,7 @@ public class FileStructure {
 	 */
 	public void changeDirectory(String path) {
 		if (!isValidPath(path)) {
-			System.out.println("Error: Invalid Path " + path);
+			System.out.println("ERR: INVALID PATH");
 			return;
 		}
 		if (path.startsWith("/"))
@@ -58,6 +58,8 @@ public class FileStructure {
 		for (String dirName : dirPath) {
 			currentNode = currentNode.getDirectory(dirName);
 		}
+
+		System.out.println("SUCC: REACHED");
 	}
 
 	/**
@@ -96,9 +98,16 @@ public class FileStructure {
 	 *            Directories names with which directory has to be created.
 	 */
 	public void makeDirectories(String... paths) {
+
+		boolean isError = false;
 		for (String path : paths) {
-			makeDirectory(path);
+			isError = isError | !makeDirectory(path);
 		}
+
+		if (!isError)
+			System.out.println("SUCC: CREATED");
+		else
+			System.out.println("ERR: INVALID PATH / DIRECTORY ALREADY EXIST");
 	}
 
 	/**
@@ -109,14 +118,13 @@ public class FileStructure {
 	 *            This is the path where directory will be created. Can be absolute
 	 *            or relative.
 	 */
-	private void makeDirectory(String path) {
+	private boolean makeDirectory(String path) {
 		path = path.trim();
 
 		String parentPath = PathUtils.getParentPath(path);
 
 		if (!isValidPath(parentPath)) {
-			System.out.println("Invalid Path: " + path);
-			return;
+			return false;
 		}
 
 		FileNode tempNode;
@@ -131,7 +139,7 @@ public class FileStructure {
 			tempNode = tempNode.getDirectory(parentDir);
 		}
 
-		tempNode.addDirectory(PathUtils.getLastDirectory(path));
+		return tempNode.addDirectory(PathUtils.getLastDirectory(path));
 	}
 
 	/**
@@ -143,9 +151,16 @@ public class FileStructure {
 	 *            or relative.
 	 */
 	public void removeDirectories(String... paths) {
+
+		boolean isError = false;
 		for (String path : paths) {
-			removeDirectory(path);
+			isError = isError | !removeDirectory(path);
 		}
+
+		if (!isError)
+			System.out.println("SUCC: DELETED");
+		else
+			System.out.println("ERR: INVALID PATH / DIRECTORY DOES NOT EXIST");
 	}
 
 	/**
@@ -156,17 +171,20 @@ public class FileStructure {
 	 *            This is the path from where directory is to be removed. Specified
 	 *            Path can be absolute or relative.
 	 */
-	private void removeDirectory(String path) {
+	private boolean removeDirectory(String path) {
 		path = path.trim();
 
 		String parentPath = PathUtils.getParentPath(path);
 
 		if (!isValidPath(parentPath)) {
-			System.out.println("Error: Invalid Path - " + path);
-			return;
+			return false;
 		}
 
-		FileNode tempNode = currentNode;
+		FileNode tempNode;
+		if (PathUtils.isAbsolutePath(path))
+			tempNode = root;
+		else
+			tempNode = currentNode;
 
 		List<String> parentDirs = Arrays.stream(parentPath.split("/")).filter(n -> !n.equals(""))
 				.collect(Collectors.toList());
@@ -174,14 +192,14 @@ public class FileStructure {
 			tempNode = tempNode.getDirectory(parentDir);
 		}
 
-		tempNode.removeDirectory(PathUtils.getLastDirectory(path));
+		return tempNode.removeDirectory(PathUtils.getLastDirectory(path));
 	}
 
 	/**
 	 * List all directories inside the present working directory.
 	 */
 	public void listDirectories() {
-		System.out.println(currentNode.listDirectories());
+		System.out.println("DIRS: " + currentNode.listDirectories());
 	}
 
 	/**
@@ -196,12 +214,13 @@ public class FileStructure {
 			lastNode = false;
 			node = node.getParentDirectory();
 		}
-		System.out.println("/" + pwd);
+		System.out.println("PATH: /" + pwd);
 	}
 
 	public void clearSession() {
 		root = new FileNode("/");
 		currentNode = root;
+		System.out.println("SUCC: CLEARED: RESET TO ROOT");
 	}
 
 }

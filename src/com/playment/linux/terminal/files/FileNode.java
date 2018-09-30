@@ -61,26 +61,28 @@ public class FileNode {
 		return name;
 	}
 
-	public void addDirectory(String name) {
+	public boolean addDirectory(String name) {
 		if (children.containsKey(name)) {
-			System.out.println("Error: Directory '" + name + "' already exist");
+			return false;
 		}
 		FileNode node = new FileNode(name);
 		node.parent = this;
 		children.put(name, node);
+		return true;
 	}
 
-	public void removeDirectory(String name) {
+	public boolean removeDirectory(String name) {
 		if (children.containsKey(name)) {
 			children.remove(name);
+			return true;
 		} else {
-			System.out.println("Error: Directory '" + name + "' does not exist");
+			return false;
 		}
 	}
 
 	public FileNode getDirectory(String name) {
 		if (!children.containsKey(name)) {
-			System.out.println("Error: Directory '" + name + "' does not exist");
+			return null;
 		}
 		return children.get(name);
 	}
@@ -88,7 +90,7 @@ public class FileNode {
 	public String listDirectories() {
 		StringBuilder list = new StringBuilder();
 		if (children.keySet().size() == 0)
-			System.out.println("<empty>");
+			return "<empty>";
 		children.keySet().stream().forEach(name -> list.append(name + " "));
 		return list.toString();
 	}

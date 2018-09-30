@@ -7,7 +7,9 @@ import java.util.Map;
 import com.playment.linux.terminal.utils.CommandUtils;
 
 /**
- * All implementation of commands resides here.
+ * All implementation of commands resides here. All are loaded eagerly in a map.
+ * All classes in this package implementing Command interface is considered as
+ * Command implementation.
  * 
  * @author Shahroz Saleem
  *
@@ -40,7 +42,7 @@ public class CommandFactory {
 	 */
 	public static void executeCommand(String command, String... args) {
 		if (!isValidCommand(command)) {
-			System.out.println("Invalid command " + command);
+			System.out.println("ERR: CANNOT RECOGNIZE INPUT.");
 		} else {
 			commands.get(command).execute(args);
 		}

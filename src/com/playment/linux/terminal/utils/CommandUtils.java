@@ -7,6 +7,13 @@ import org.reflections.Reflections;
 
 import com.playment.linux.terminal.commands.Command;
 
+/**
+ * All utility services related to commands such as getting the command instance
+ * goes here.
+ * 
+ * @author Shahroz Saleem
+ *
+ */
 public class CommandUtils {
 
 	private static final String COMMAND_BASE_PACKAGE = "com.playment.linux.terminal.commands";
@@ -27,5 +34,5 @@ public class CommandUtils {
 		}
 		return commandInstance;
 	}
-	
+
 }
